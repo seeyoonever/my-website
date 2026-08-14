@@ -1,33 +1,90 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Form Embed Test</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: 1px solid #ccc;
-      margin-top: 20px;
-    }
-    button {
-      padding: 10px 15px;
-      margin-right: 10px;
-      cursor: pointer;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Шпион</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+  <div class="app">
+    <h1 class="app-title">Шпион</h1>
 
-<h2>Тест формы во фрейме</h2>
+    <div id="error-banner" class="error-banner" hidden></div>
 
-<!-- ВСТАВЬ СЮДА URL СВОЕЙ ФОРМЫ -->
-<iframe id="formFrame" src="https://cookiesaver.marketing-platform.devel:27443/form?form=aLsr2XHVuJdYGRLP122SSXg8c8cjDhuTEMifGwzW2Rtjzu9KRimnjpvHHDtVxrxb6z11AVijmGiZ8"></iframe>
+    <!-- Экран 1: создание / вход в игру -->
+    <section id="screen-home" class="screen">
+      <div class="card">
+        <h2>Создать игру</h2>
+        <label class="field">
+          <span>Ваше имя</span>
+          <input type="text" id="create-name" placeholder="Например, Глеб" maxlength="30">
+        </label>
+        <button id="btn-create" class="primary">Создать</button>
+      </div>
 
-<br><br>
+      <div class="card">
+        <h2>Присоединиться</h2>
+        <label class="field">
+          <span>Код комнаты</span>
+          <input type="text" id="join-game-id" placeholder="Код комнаты">
+        </label>
+        <label class="field">
+          <span>Ваше имя</span>
+          <input type="text" id="join-name" placeholder="Например, Анна" maxlength="30">
+        </label>
+        <button id="btn-join" class="primary">Войти</button>
+      </div>
+    </section>
 
+    <!-- Экран 2: лобби -->
+    <section id="screen-lobby" class="screen" hidden>
+      <div class="card">
+        <div class="room-code-row">
+          <span>Код комнаты</span>
+          <code id="lobby-game-id"></code>
+        </div>
+        <button id="btn-copy-link" class="secondary">Скопировать ссылку для друзей</button>
+      </div>
+
+      <div class="card">
+        <h2>Игроки (<span id="lobby-players-count">0</span>)</h2>
+        <ul id="lobby-players-list" class="players-list"></ul>
+      </div>
+
+      <div id="lobby-admin-controls" class="card" hidden>
+        <h2>Тема игры</h2>
+        <label class="field">
+          <span>Тема</span>
+          <select id="lobby-theme-select">
+            <option value="">Выберите тему</option>
+            <option value="place">Место</option>
+            <option value="person">Человек</option>
+            <option value="hero">Персонаж</option>
+          </select>
+        </label>
+        <button id="btn-set-theme" class="secondary">Сохранить тему</button>
+
+        <button id="btn-start-game" class="primary" disabled>Начать игру</button>
+        <button id="btn-cancel-game" class="danger">Отменить игру</button>
+      </div>
+
+      <p id="lobby-wait-message" class="wait-message" hidden>Ожидаем, когда админ начнёт игру...</p>
+    </section>
+
+    <!-- Экран 3: игра -->
+    <section id="screen-game" class="screen" hidden>
+      <div id="word-card" class="word-card">
+        <span id="word-text">…</span>
+      </div>
+
+      <div id="game-admin-controls" class="card" hidden>
+        <button id="btn-restart-game" class="secondary">Начать заново</button>
+        <button id="btn-cancel-game-2" class="danger">Завершить игру</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
 </body>
 </html>
